@@ -200,6 +200,60 @@
   footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
   footer a{color:var(--seal);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.83rem}
 
+  /* ── 미리보기 버튼 ── */
+  .preview-btn{
+    display:inline-block;margin-top:12px;
+    font-family:'IBM Plex Mono',monospace;font-size:.8rem;
+    color:var(--seal);background:none;
+    border:1px solid rgba(184,64,46,.45);border-radius:4px;
+    padding:6px 14px;cursor:pointer;
+    transition:background .15s ease,color .15s ease;
+  }
+  .preview-btn:hover{background:var(--seal);color:#fff}
+
+  /* ── 라이트박스 갤러리 ── */
+  .lightbox{
+    position:fixed;inset:0;z-index:100;
+    background:rgba(21,42,37,.92);
+    display:none;align-items:center;justify-content:center;
+  }
+  .lightbox.open{display:flex}
+  .lightbox figure{
+    max-width:min(1200px,92vw);max-height:86vh;
+    display:flex;flex-direction:column;gap:10px;margin:0;
+  }
+  .lightbox img{
+    max-width:100%;max-height:calc(86vh - 40px);
+    object-fit:contain;border-radius:6px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+    background:#fff;
+  }
+  .lightbox figcaption{
+    color:var(--chalk);text-align:center;
+    font-family:'IBM Plex Mono',monospace;font-size:.8rem;
+    opacity:.85;
+  }
+  .lb-btn{
+    position:absolute;top:50%;transform:translateY(-50%);
+    background:rgba(243,241,231,.12);color:var(--chalk);
+    border:1px solid rgba(243,241,231,.35);border-radius:50%;
+    width:46px;height:46px;font-size:1.3rem;line-height:1;
+    cursor:pointer;transition:background .15s ease;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lb-btn:hover{background:rgba(243,241,231,.28)}
+  .lb-prev{left:18px}
+  .lb-next{right:18px}
+  .lb-close{
+    position:absolute;top:16px;right:18px;transform:none;
+    width:42px;height:42px;font-size:1.1rem;
+  }
+  .lightbox .lb-hidden{visibility:hidden}
+  @media (max-width:600px){
+    .lb-btn{width:38px;height:38px}
+    .lb-prev{left:8px}.lb-next{right:8px}
+  }
+
   @media (max-width:600px){
     header{padding:64px 0 52px}
     section{padding:56px 0}
@@ -259,6 +313,7 @@
         <h3>양산여자중학교 평가 관리</h3>
         <p>교과 평가 업무를 체계적으로 관리하는 시스템. 평가 계획부터 결과 관리까지 학교 평가 업무의 흐름을 담았습니다.</p>
         <div class="stack"><span>웹앱</span><span>평가 업무</span></div>
+        <button class="preview-btn" data-gallery="eval-manage">미리보기 →</button>
       </div>
       <div class="card">
         <div class="stamp green">운영<br>중</div>
@@ -330,6 +385,7 @@
         <h3>양산여중 전자칠판 DID 안내</h3>
         <p>DID 시스템의 취지와 사용법을 교직원에게 안내하는 페이지. 시스템은 함께 쓸 때 완성된다는 원칙의 실천입니다.</p>
         <div class="stack"><span>사용 안내</span><span>교직원 공유</span></div>
+        <button class="preview-btn" data-gallery="did-guide">미리보기 →</button>
       </div>
     </div>
     <p style="margin-top:20px"><a href="https://github.com/y07e/ysgm-did" target="_blank" rel="noopener" style="color:var(--seal);font-size:.9rem;text-decoration:none;border-bottom:1px solid rgba(184,64,46,.35)">github.com/y07e/ysgm-did →</a></p>
@@ -348,6 +404,7 @@
         <h3>나의 은퇴 시뮬레이터</h3>
         <p>은퇴 시점과 자산 조건을 입력하면 은퇴 이후를 시뮬레이션하는 도구. 사학연금 기반 명예퇴직 설계의 출발점이 된 프로젝트입니다.</p>
         <div class="stack"><span>시뮬레이션</span><span>은퇴 설계</span></div>
+        <button class="preview-btn" data-gallery="retire-simulator">미리보기 →</button>
       </div>
       <div class="card">
         <div class="stamp green">활용<br>중</div>
@@ -372,6 +429,7 @@
         <h3>쫑아빠의 트레이딩 데스크</h3>
         <p>AI 자동매매를 실험하는 개인 트레이딩 데스크. 가장 도전적인 프로젝트로, 비개발자가 AI와 함께 갈 수 있는 한계를 시험하고 있습니다.</p>
         <div class="stack"><span>AI 자동매매</span><span>실험 프로젝트</span></div>
+        <button class="preview-btn" data-gallery="trading-desk">미리보기 →</button>
       </div>
     </div>
   </div>
@@ -418,6 +476,7 @@
         <h3>쫑아빠 비서 — 나만의 통합 비서</h3>
         <p>일상과 업무를 관리하는 개인 통합 비서 웹앱. 상세 개선 명세서(SPEC)를 직접 작성해 Claude Code에 전달하는 방식으로 개발했고, 모바일 앱 전환 로드맵까지 설계했습니다.</p>
         <div class="stack"><span>Next.js</span><span>Supabase</span><span>Firebase</span><span>Capacitor</span></div>
+        <button class="preview-btn" data-gallery="secretary">미리보기 →</button>
       </div>
       <div class="card">
         <div class="stamp green">활용<br>중</div>
@@ -506,6 +565,86 @@
   </div>
   <p>쫑아빠 · 도덕·윤리 교사 · 교단 위의 AI 실험실</p>
 </footer>
+
+<!-- 라이트박스 갤러리 -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="스크린샷 미리보기">
+  <button class="lb-btn lb-close" aria-label="닫기">✕</button>
+  <button class="lb-btn lb-prev" aria-label="이전">‹</button>
+  <figure>
+    <img id="lb-img" src="" alt="프로젝트 스크린샷" loading="lazy">
+    <figcaption id="lb-caption"></figcaption>
+  </figure>
+  <button class="lb-btn lb-next" aria-label="다음">›</button>
+</div>
+
+<script>
+// 프로젝트별 스크린샷 목록 — 새 프로젝트 추가 시 여기에 항목만 추가하면 됨
+const GALLERY = {
+  'retire-simulator': { title: '나의 은퇴 시뮬레이터', count: 2 },
+  'eval-manage':      { title: '양산여자중학교 평가 관리', count: 1 },
+  'did-guide':        { title: '양산여중 전자칠판 DID 안내', count: 2 },
+  'secretary':        { title: '쫑아빠 비서', count: 1 },
+  'trading-desk':     { title: '쫑아빠의 트레이딩 데스크', count: 1 },
+};
+
+(function () {
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lb-img');
+  const caption = document.getElementById('lb-caption');
+  const prevBtn = lb.querySelector('.lb-prev');
+  const nextBtn = lb.querySelector('.lb-next');
+  let slug = null, idx = 0;
+
+  function src(i) { return 'screenshots/' + slug + '-' + (i + 1) + '.webp'; }
+
+  function show(i) {
+    const g = GALLERY[slug];
+    idx = (i + g.count) % g.count;
+    img.src = src(idx);
+    caption.textContent = g.title + ' (' + (idx + 1) + ' / ' + g.count + ')';
+    prevBtn.classList.toggle('lb-hidden', g.count < 2);
+    nextBtn.classList.toggle('lb-hidden', g.count < 2);
+  }
+
+  function open(s) {
+    if (!GALLERY[s]) return;
+    slug = s;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    show(0);
+  }
+
+  function close() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    img.src = '';
+    slug = null;
+  }
+
+  document.querySelectorAll('.preview-btn').forEach(btn =>
+    btn.addEventListener('click', () => open(btn.dataset.gallery)));
+  prevBtn.addEventListener('click', e => { e.stopPropagation(); show(idx - 1); });
+  nextBtn.addEventListener('click', e => { e.stopPropagation(); show(idx + 1); });
+  lb.querySelector('.lb-close').addEventListener('click', close);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
+
+  // 모바일 스와이프
+  let touchX = null;
+  lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+    touchX = null;
+  }, { passive: true });
+})();
+</script>
 
 </body>
 </html>
