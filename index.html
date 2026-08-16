@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쫑아빠 포트폴리오 — 교단 위의 AI 실험실</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --board:#1d3831;        /* 칠판 진녹색 */
+    --board-deep:#152a25;
+    --chalk:#f3f1e7;        /* 분필 화이트 */
+    --chalk-yellow:#e9c655; /* 노란 분필 */
+    --paper:#f7f6f1;        /* 시험지 종이 */
+    --ink:#25322d;          /* 잉크 */
+    --ink-soft:#5c6b64;
+    --seal:#b8402e;         /* 인주(도장) */
+    --line:#dcd9cc;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans KR',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.7;
+    font-weight:400;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+  /* ── 히어로: 칠판 ── */
+  header{
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.045), transparent 55%),
+      radial-gradient(ellipse at 85% 90%, rgba(255,255,255,.03), transparent 50%),
+      var(--board);
+    color:var(--chalk);
+    padding:88px 0 72px;
+    border-bottom:10px solid #8a6a42; /* 칠판 나무틀 */
+    position:relative;
+    overflow:hidden;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.82rem;letter-spacing:.22em;
+    color:var(--chalk-yellow);
+    margin-bottom:22px;
+  }
+  h1{
+    font-family:'Gowun Batang',serif;
+    font-size:clamp(2.1rem,5.5vw,3.4rem);
+    font-weight:700;line-height:1.3;
+    margin-bottom:8px;
+  }
+  h1 .underline{
+    background-image:linear-gradient(transparent 78%, rgba(233,198,85,.55) 78%);
+  }
+  .hero-sub{
+    font-size:clamp(1rem,2.4vw,1.15rem);
+    color:rgba(243,241,231,.82);
+    max-width:580px;margin-top:18px;font-weight:300;
+  }
+  .hero-meta{
+    margin-top:36px;display:flex;gap:28px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;font-size:.85rem;
+    color:rgba(243,241,231,.7);
+  }
+  .hero-meta b{color:var(--chalk-yellow);font-weight:500;display:block;font-size:1.35rem;margin-bottom:2px}
+
+  /* ── 목차(칠판 아래 인덱스) ── */
+  nav.toc{
+    background:#fff;border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:10;
+  }
+  nav.toc .wrap{
+    display:flex;gap:4px;overflow-x:auto;padding:0 24px;
+  }
+  nav.toc a{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;
+    color:var(--ink-soft);text-decoration:none;
+    padding:13px 14px;white-space:nowrap;
+    border-bottom:2px solid transparent;
+  }
+  nav.toc a:hover{color:var(--seal);border-bottom-color:var(--seal)}
+
+  /* ── 섹션 공통 ── */
+  section{padding:72px 0}
+  section + section{border-top:1px solid var(--line)}
+  .sec-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;letter-spacing:.2em;
+    color:var(--seal);margin-bottom:10px;
+  }
+  h2{
+    font-family:'Gowun Batang',serif;
+    font-size:clamp(1.5rem,3.4vw,2rem);
+    font-weight:700;margin-bottom:14px;
+  }
+  .sec-intro{color:var(--ink-soft);max-width:660px;margin-bottom:44px}
+
+  /* ── 프로젝트 카드 ── */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px}
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:26px 24px 22px;
+    position:relative;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(37,50,45,.09)}
+  .card h3{
+    font-family:'Gowun Batang',serif;
+    font-size:1.12rem;font-weight:700;margin-bottom:8px;padding-right:64px;
+  }
+  .card p{font-size:.9rem;color:var(--ink-soft);margin-bottom:14px}
+  .stack{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;color:var(--ink-soft);
+    display:flex;gap:6px;flex-wrap:wrap;
+  }
+  .stack span{border:1px solid var(--line);border-radius:3px;padding:2px 7px;background:var(--paper)}
+  .card a{color:var(--seal);font-size:.85rem;text-decoration:none;border-bottom:1px solid rgba(184,64,46,.35)}
+  .card a:hover{border-bottom-color:var(--seal)}
+
+  /* ── 결재 도장 배지 ── */
+  .stamp{
+    position:absolute;top:18px;right:16px;
+    font-family:'Gowun Batang',serif;font-weight:700;
+    font-size:.72rem;letter-spacing:.08em;
+    color:var(--seal);
+    border:2px solid var(--seal);
+    border-radius:50%;
+    width:52px;height:52px;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    transform:rotate(-8deg);
+    opacity:.85;
+    line-height:1.25;
+    padding:4px;
+  }
+  .stamp.green{color:#2c6e49;border-color:#2c6e49}
+  .stamp.gray{color:#7a8378;border-color:#7a8378}
+  .stamp.blue{color:#2b5f8a;border-color:#2b5f8a}
+
+  /* ── 타임라인 ── */
+  .timeline{list-style:none;position:relative;padding-left:28px;max-width:640px}
+  .timeline::before{
+    content:"";position:absolute;left:7px;top:6px;bottom:6px;
+    width:2px;background:var(--line);
+  }
+  .timeline li{position:relative;padding-bottom:30px}
+  .timeline li:last-child{padding-bottom:0}
+  .timeline li::before{
+    content:"";position:absolute;left:-27px;top:8px;
+    width:12px;height:12px;border-radius:50%;
+    background:var(--paper);border:3px solid var(--seal);
+  }
+  .timeline .yr{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.8rem;color:var(--seal);letter-spacing:.1em;
+  }
+  .timeline h4{font-family:'Gowun Batang',serif;font-size:1.05rem;font-weight:700;margin:2px 0 4px}
+  .timeline p{font-size:.9rem;color:var(--ink-soft)}
+
+  /* ── 도구 ── */
+  .tools{display:flex;flex-wrap:wrap;gap:10px;max-width:720px}
+  .tools span{
+    font-family:'IBM Plex Mono',monospace;font-size:.82rem;
+    background:#fff;border:1px solid var(--line);
+    border-radius:20px;padding:7px 16px;
+  }
+
+  /* ── 원칙(칠판 미니) ── */
+  .principles{
+    background:var(--board-deep);color:var(--chalk);
+    border-radius:8px;padding:44px 40px;
+    border-bottom:6px solid #8a6a42;
+  }
+  .principles h2{color:var(--chalk)}
+  .principles .sec-label{color:var(--chalk-yellow)}
+  .principles ol{list-style:none;counter-reset:p;max-width:640px}
+  .principles li{
+    counter-increment:p;padding:14px 0;font-weight:300;
+    border-bottom:1px dashed rgba(243,241,231,.18);
+    display:flex;gap:16px;align-items:baseline;
+  }
+  .principles li:last-child{border-bottom:none}
+  .principles li::before{
+    content:counter(p,hangul) ".";
+    font-family:'Gowun Batang',serif;font-weight:700;
+    color:var(--chalk-yellow);min-width:1.6em;
+  }
+
+  footer{
+    padding:52px 0 64px;text-align:center;
+    color:var(--ink-soft);font-size:.85rem;
+  }
+  footer .links{margin-bottom:14px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  footer a{color:var(--seal);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.83rem}
+
+  @media (max-width:600px){
+    header{padding:64px 0 52px}
+    section{padding:56px 0}
+    .principles{padding:32px 24px}
+    .card h3{padding-right:58px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .card{transition:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">TEACHER × AI PORTFOLIO</p>
+    <h1>34년차 도덕 교사,<br><span class="underline">코드 한 줄 모른 채</span> 시스템을 만들다</h1>
+    <p class="hero-sub">
+      1993년부터 교단에 서 온 중등 도덕·윤리 교사 <strong>쫑아빠</strong>입니다.
+      비개발자이지만 Claude와 함께 학교 업무를 자동화하고,
+      웹 서비스를 배포하고, 은퇴 이후의 삶까지 설계합니다.
+      이 페이지는 그 실험의 기록입니다.
+    </p>
+    <div class="hero-meta">
+      <div><b>34년</b>교직 경력 (1993~)</div>
+      <div><b>20+</b>제작한 프로젝트</div>
+      <div><b>0줄</b>직접 배운 코드</div>
+      <div><b>2029</b>Life 2.0 시작</div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#school">01 학교·학급 운영</a>
+    <a href="#did">02 전자칠판 DID</a>
+    <a href="#finance">03 은퇴·투자 설계</a>
+    <a href="#auto">04 업무 자동화</a>
+    <a href="#life">05 개인·생활</a>
+    <a href="#journey">06 여정</a>
+    <a href="#tools">07 도구</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- 01 학교·학급 운영 -->
+<section id="school">
+  <div class="wrap">
+    <p class="sec-label">01 · 학교·학급 운영</p>
+    <h2>교무실과 교실을 위한 도구들</h2>
+    <p class="sec-intro">평가, 진도, 학급 운영, 학사 안내까지 — 학교 현장에서 매일 부딪히는 불편을 하나씩 웹 도구로 바꿨습니다.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="stamp green">운영<br>중</div>
+        <h3>양산여자중학교 평가 관리</h3>
+        <p>교과 평가 업무를 체계적으로 관리하는 시스템. 평가 계획부터 결과 관리까지 학교 평가 업무의 흐름을 담았습니다.</p>
+        <div class="stack"><span>웹앱</span><span>평가 업무</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp green">운영<br>중</div>
+        <h3>시험지 열람 신청 시스템</h3>
+        <p>학생·학부모의 시험지 열람 신청을 온라인으로 받는 시스템. 종이 신청서와 수기 접수를 디지털 프로세스로 전환했습니다.</p>
+        <div class="stack"><span>웹앱</span><span>신청 접수</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp green">현업<br>적용</div>
+        <h3>학급노트 (2026 1학년 9반)</h3>
+        <p>담임 학급 운영을 위한 디지털 학급노트. 학급의 일상 기록과 관리를 한곳에 모았습니다.</p>
+        <div class="stack"><span>학급 운영</span><span>담임 업무</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp green">현업<br>적용</div>
+        <h3>도덕 진도 관리 (1·3학년)</h3>
+        <p>2026학년도 1학년·3학년 도덕 수업의 진도를 학급별로 추적·관리하는 도구. 여러 학급을 오가는 교과 교사의 필수품입니다.</p>
+        <div class="stack"><span>수업 관리</span><span>진도 추적</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp blue">안내<br>용</div>
+        <h3>자유학기제 일정 안내</h3>
+        <p>자유학기제 운영 일정을 학생·학부모가 한눈에 볼 수 있게 정리한 안내 페이지. 문의 전화를 줄이는 것이 목표였습니다.</p>
+        <div class="stack"><span>자유학기제</span><span>일정 안내</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp blue">안내<br>용</div>
+        <h3>학교 전달사항 안내</h3>
+        <p>학교의 공지·전달사항을 모아 보여주는 안내 페이지. 가정통신문과 공지가 흩어지는 문제를 해결하기 위한 시도입니다.</p>
+        <div class="stack"><span>공지</span><span>학교 소통</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp">v3</div>
+        <h3>학급수 감소 예측 모델</h3>
+        <p>실제 출생 통계 기반으로 학급수 변화를 예측한 데이터 분석. 2034~35년 29학급 → 약 21학급 전망과 교과별 교원 수급 분석까지 수행했습니다.</p>
+        <div class="stack"><span>출생통계</span><span>데이터 분석</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp gray">설계<br>완료</div>
+        <h3>온라인 교무실</h3>
+        <p>교무실 업무 전체를 디지털로 옮기는 아키텍처 설계. 공지·결재·자료 공유를 하나로 통합하는 청사진을 Claude Code 프로젝트로 구축했습니다.</p>
+        <div class="stack"><span>Next.js 14</span><span>Supabase</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 전자칠판 DID -->
+<section id="did">
+  <div class="wrap">
+    <p class="sec-label">02 · 전자칠판 DID 프로젝트</p>
+    <h2>잠자던 전자칠판 29대의 부활</h2>
+    <p class="sec-intro">방치된 전자칠판을 교실 정보 디스플레이(DID)로 재탄생시킨 3부작 프로젝트. NEIS 학사일정·급식과 대기질 API를 연동해 실시간 정보를 보여줍니다. GitHub에 공개했습니다.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="stamp green">운영<br>중</div>
+        <h3>전자칠판 관리자</h3>
+        <p>29대 전자칠판의 표시 내용을 한곳에서 제어하는 관리자 콘솔. 교실마다 돌아다니지 않고 원격으로 화면을 운영합니다.</p>
+        <div class="stack"><span>관리자 콘솔</span><span>원격 제어</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp green">운영<br>중</div>
+        <h3>전자칠판 우리반(1-9) 화면</h3>
+        <p>담임 학급인 1학년 9반 맞춤 디스플레이. 학급 일정과 안내를 교실 전자칠판에 상시 표시합니다.</p>
+        <div class="stack"><span>학급 맞춤</span><span>상시 표시</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp blue">안내<br>용</div>
+        <h3>양산여중 전자칠판 DID 안내</h3>
+        <p>DID 시스템의 취지와 사용법을 교직원에게 안내하는 페이지. 시스템은 함께 쓸 때 완성된다는 원칙의 실천입니다.</p>
+        <div class="stack"><span>사용 안내</span><span>교직원 공유</span></div>
+      </div>
+    </div>
+    <p style="margin-top:20px"><a href="https://github.com/y07e/ysgm-did" target="_blank" rel="noopener" style="color:var(--seal);font-size:.9rem;text-decoration:none;border-bottom:1px solid rgba(184,64,46,.35)">github.com/y07e/ysgm-did →</a></p>
+  </div>
+</section>
+
+<!-- 03 은퇴·투자 -->
+<section id="finance">
+  <div class="wrap">
+    <p class="sec-label">03 · 은퇴·투자 설계</p>
+    <h2>2029년, 숫자로 준비하는 두 번째 인생</h2>
+    <p class="sec-intro">막연한 불안 대신 시뮬레이션과 대시보드로. 은퇴 자금 설계부터 투자 판단 보조까지 직접 만든 도구로 관리합니다.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="stamp">Ver<br>1.0</div>
+        <h3>나의 은퇴 시뮬레이터</h3>
+        <p>은퇴 시점과 자산 조건을 입력하면 은퇴 이후를 시뮬레이션하는 도구. 사학연금 기반 명예퇴직 설계의 출발점이 된 프로젝트입니다.</p>
+        <div class="stack"><span>시뮬레이션</span><span>은퇴 설계</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp green">활용<br>중</div>
+        <h3>은퇴 후 현금흐름 설계</h3>
+        <p>은퇴 이후 수입과 지출의 흐름을 시각화하는 설계 도구. 연금·투자·부수입이 시간에 따라 어떻게 맞물리는지 확인합니다.</p>
+        <div class="stack"><span>현금흐름</span><span>시각화</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp green">활용<br>중</div>
+        <h3>자산관리 포트폴리오</h3>
+        <p>보유 자산의 구성과 흐름을 한눈에 보는 개인 자산관리 대시보드. 흩어진 자산 현황을 하나의 화면으로 모았습니다.</p>
+        <div class="stack"><span>자산 현황</span><span>대시보드</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp green">활용<br>중</div>
+        <h3>주식 신호 대시보드</h3>
+        <p>관심 종목의 시장 데이터와 신호를 모아 보는 투자 판단 보조 대시보드. 감이 아닌 데이터로 판단하기 위한 도구입니다.</p>
+        <div class="stack"><span>시장 데이터</span><span>대시보드</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp blue">실험<br>중</div>
+        <h3>쫑아빠의 트레이딩 데스크</h3>
+        <p>AI 자동매매를 실험하는 개인 트레이딩 데스크. 가장 도전적인 프로젝트로, 비개발자가 AI와 함께 갈 수 있는 한계를 시험하고 있습니다.</p>
+        <div class="stack"><span>AI 자동매매</span><span>실험 프로젝트</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 업무 자동화 -->
+<section id="auto">
+  <div class="wrap">
+    <p class="sec-label">04 · 업무 자동화</p>
+    <h2>반복 업무는 시스템에게</h2>
+    <p class="sec-intro">교사의 시간을 잡아먹는 행정 업무를 워크플로우로 만들었습니다. 한 번 만들면 매년 다시 씁니다.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="stamp green">현업<br>적용</div>
+        <h3>행동특성 누가기록 워크플로우</h3>
+        <p>학생별 키워드만 입력하면 생활기록부 문체의 누가기록 초안이 생성되는 파이프라인. 학급 27명 기록을 이 방식으로 완성했습니다.</p>
+        <div class="stack"><span>Claude</span><span>키워드 → 기록문</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp green">현업<br>적용</div>
+        <h3>자유학기제 세특 문구 뱅크</h3>
+        <p>세부능력특기사항 문구 33종을 드롭다운으로 선택하고, NEIS 글자수 초과를 자동 경고하는 엑셀 워크북. 동료 교사도 바로 쓸 수 있게 설계했습니다.</p>
+        <div class="stack"><span>Excel</span><span>드롭다운</span><span>글자수 검증</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp green">스킬<br>제작</div>
+        <h3>HWPX 공문 자동 작성</h3>
+        <p>공문·기안문 양식(HWPX)을 첨부하면 주제에 맞는 내용을 자동으로 채워주는 Claude 스킬을 직접 제작. claw-hwp 플러그인과 결합해 한글 문서 처리를 자동화했습니다.</p>
+        <div class="stack"><span>Claude Skill</span><span>claw-hwp</span><span>HWPX</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 개인·생활 -->
+<section id="life">
+  <div class="wrap">
+    <p class="sec-label">05 · 개인·생활</p>
+    <h2>일상도 시스템으로</h2>
+    <p class="sec-intro">학교 밖의 삶에도 같은 방식을 적용했습니다.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="stamp green">배포<br>완료</div>
+        <h3>쫑아빠 비서 — 나만의 통합 비서</h3>
+        <p>일상과 업무를 관리하는 개인 통합 비서 웹앱. 상세 개선 명세서(SPEC)를 직접 작성해 Claude Code에 전달하는 방식으로 개발했고, 모바일 앱 전환 로드맵까지 설계했습니다.</p>
+        <div class="stack"><span>Next.js</span><span>Supabase</span><span>Firebase</span><span>Capacitor</span></div>
+      </div>
+      <div class="card">
+        <div class="stamp green">활용<br>중</div>
+        <h3>여행 일정 관리 앱</h3>
+        <p>여행 일정과 동선을 계획·관리하는 앱. 가족 여행 준비를 종이 메모에서 하나의 앱으로 옮겼습니다.</p>
+        <div class="stack"><span>일정 관리</span><span>동선 계획</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 타임라인 -->
+<section id="journey">
+  <div class="wrap">
+    <p class="sec-label">06 · 여정</p>
+    <h2>분필에서 프롬프트까지</h2>
+    <p class="sec-intro" style="margin-bottom:36px">한 사람의 교직 인생이 AI 시대와 만나는 과정입니다.</p>
+    <ul class="timeline">
+      <li>
+        <span class="yr">1993</span>
+        <h4>교단에 서다</h4>
+        <p>중학교에서 도덕 교사로 첫발. 이후 고등학교 20년을 거쳐 다시 중학교로.</p>
+      </li>
+      <li>
+        <span class="yr">2025~</span>
+        <h4>AI를 업무의 파트너로</h4>
+        <p>Claude를 학교 문서 작성, NEIS 업무, 학급 운영에 본격 도입. "비개발자도 만들 수 있다"는 확신을 얻다.</p>
+      </li>
+      <li>
+        <span class="yr">2026</span>
+        <h4>만드는 교사</h4>
+        <p>학교 운영 도구부터 은퇴 시뮬레이터, AI 자동매매 실험까지 20여 개 프로젝트 제작. 맥미니 M2 + Claude Code 개발 환경 구축.</p>
+      </li>
+      <li>
+        <span class="yr">~2029</span>
+        <h4>Life 2.0 준비</h4>
+        <p>은퇴 준비 에세이 「Life 2.0」 집필과 콘텐츠 자산 축적. 34년의 경험을 다음 세대와 나누는 두 번째 인생 설계 중.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 07 도구 -->
+<section id="tools">
+  <div class="wrap">
+    <p class="sec-label">07 · 도구 상자</p>
+    <h2>함께 일하는 도구들</h2>
+    <p class="sec-intro">코드는 못 쓰지만, 도구를 부리는 법은 압니다.</p>
+    <div class="tools">
+      <span>Claude / Claude Code</span>
+      <span>Next.js</span>
+      <span>Supabase</span>
+      <span>Firebase</span>
+      <span>NEIS API</span>
+      <span>MCP (PlayMCP)</span>
+      <span>claw-hwp</span>
+      <span>Excel 자동화</span>
+      <span>GitHub</span>
+      <span>Mac mini M2</span>
+    </div>
+  </div>
+</section>
+
+<!-- 원칙 -->
+<section id="principles">
+  <div class="wrap">
+    <div class="principles">
+      <p class="sec-label">08 · 일하는 원칙</p>
+      <h2 style="margin-bottom:24px">교단에서 배운 것을 AI에 적용하다</h2>
+      <ol>
+        <li>기술보다 문제 정의가 먼저다. 무엇이 불편한지 정확히 쓰면 절반은 해결된다.</li>
+        <li>한 번 만든 것은 매년 다시 쓴다. 자동화는 반복에서 가치가 나온다.</li>
+        <li>혼자 쓰지 않고 동료가 쓸 수 있게 만든다. 도구는 나눌 때 완성된다.</li>
+        <li>34년의 현장 경험은 AI가 대체할 수 없는 데이터다. 기록하고, 쌓는다.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="links">
+    <a href="https://github.com/y07e" target="_blank" rel="noopener">GitHub @y07e</a>
+    <a href="https://www.threads.net/@y07e" target="_blank" rel="noopener">Threads @y07e</a>
+  </div>
+  <p>쫑아빠 · 도덕·윤리 교사 · 교단 위의 AI 실험실</p>
+</footer>
+
+</body>
+</html>
