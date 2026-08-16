@@ -332,12 +332,14 @@
         <h3>도덕 진도 관리 (1·3학년)</h3>
         <p>2026학년도 1학년·3학년 도덕 수업의 진도를 학급별로 추적·관리하는 도구. 여러 학급을 오가는 교과 교사의 필수품입니다.</p>
         <div class="stack"><span>수업 관리</span><span>진도 추적</span></div>
+        <button class="preview-btn" data-gallery="moral-progress">미리보기 →</button>
       </div>
       <div class="card">
         <div class="stamp blue">안내<br>용</div>
         <h3>자유학기제 일정 안내</h3>
         <p>자유학기제 운영 일정을 학생·학부모가 한눈에 볼 수 있게 정리한 안내 페이지. 문의 전화를 줄이는 것이 목표였습니다.</p>
         <div class="stack"><span>자유학기제</span><span>일정 안내</span></div>
+        <button class="preview-btn" data-gallery="free-semester">미리보기 →</button>
       </div>
       <div class="card">
         <div class="stamp blue">안내<br>용</div>
@@ -379,6 +381,7 @@
         <h3>전자칠판 우리반(1-9) 화면</h3>
         <p>담임 학급인 1학년 9반 맞춤 디스플레이. 학급 일정과 안내를 교실 전자칠판에 상시 표시합니다.</p>
         <div class="stack"><span>학급 맞춤</span><span>상시 표시</span></div>
+        <button class="preview-btn" data-gallery="did-class19">미리보기 →</button>
       </div>
       <div class="card">
         <div class="stamp blue">안내<br>용</div>
@@ -423,6 +426,7 @@
         <h3>주식 신호 대시보드</h3>
         <p>관심 종목의 시장 데이터와 신호를 모아 보는 투자 판단 보조 대시보드. 감이 아닌 데이터로 판단하기 위한 도구입니다.</p>
         <div class="stack"><span>시장 데이터</span><span>대시보드</span></div>
+        <button class="preview-btn" data-gallery="stock-signal">미리보기 →</button>
       </div>
       <div class="card">
         <div class="stamp blue">실험<br>중</div>
@@ -483,6 +487,7 @@
         <h3>여행 일정 관리 앱</h3>
         <p>여행 일정과 동선을 계획·관리하는 앱. 가족 여행 준비를 종이 메모에서 하나의 앱으로 옮겼습니다.</p>
         <div class="stack"><span>일정 관리</span><span>동선 계획</span></div>
+        <button class="preview-btn" data-gallery="travel-app">미리보기 →</button>
       </div>
     </div>
   </div>
@@ -581,10 +586,15 @@
 // 프로젝트별 스크린샷 목록 — 새 프로젝트 추가 시 여기에 항목만 추가하면 됨
 const GALLERY = {
   'retire-simulator': { title: '나의 은퇴 시뮬레이터', count: 2 },
-  'eval-manage':      { title: '양산여자중학교 평가 관리', count: 1 },
+  'eval-manage':      { title: '양산여자중학교 평가 관리', count: 2 },
   'did-guide':        { title: '양산여중 전자칠판 DID 안내', count: 2 },
   'secretary':        { title: '쫑아빠 비서', count: 1 },
   'trading-desk':     { title: '쫑아빠의 트레이딩 데스크', count: 1 },
+  'free-semester':    { title: '자유학기제 일정 안내', count: 1 },
+  'did-class19':      { title: '전자칠판 우리반(1-9) 화면', count: 1 },
+  'travel-app':       { title: '여행 일정 관리 앱', count: 1 },
+  'moral-progress':   { title: '도덕 진도 관리', count: 1 },
+  'stock-signal':     { title: '주식 신호 대시보드', count: 1 },
 };
 
 (function () {
