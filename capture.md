@@ -36,10 +36,33 @@ Claude Code에게 "capture.md 읽고 ○○ 프로젝트 스크린샷 다시 찍
 | 슬러그 | 프로젝트 | URL | 로그인 |
 |--------|---------|-----|--------|
 | retire-simulator | 나의 은퇴 시뮬레이터 | https://y07e.github.io/retire-sim/ | 불필요 |
-| eval-manage | 양산여중 평가 관리 | https://yangsan-exam-system.vercel.app | 필요 |
+| eval-manage | 양산여중 평가 관리 | https://exam-manager-navy.vercel.app | 관리자만 |
 | did-guide | 전자칠판 DID 안내 | https://ysgm-did.web.app | 불필요 |
-| secretary | 쫑아빠 비서 | https://jjongappa-secretary.web.app | 필요 |
+| secretary | 쫑아빠 비서 | https://jjongappa-secretary.web.app | 필요(구글) |
 | trading-desk | 트레이딩 데스크 | 로컬: `cd ~/toss-auto-trader && npm run dash` | 로컬 |
+| free-semester | 자유학기제 일정 안내 | https://free-semester-schedule.vercel.app | 불필요 · 교사 이름 제거 필요 |
+| did-class19 | 전자칠판 우리반(1-9) | https://ysgm-did.web.app/display/?grade=1&class=9 | 불필요 · 교사 이름 블러 필요 |
+| travel-app | 여행 일정 관리 앱 | https://travel-route-tracker.vercel.app | 불필요(보기 모드) |
+| moral-progress | 도덕 진도 관리 | https://y07e.github.io/moral-progress-tracker/ | 불필요 |
+| stock-signal | 주식 신호 대시보드 | https://stock-signal-dashboard.onrender.com | 불필요 · 슬립 해제에 1~2분 |
+
+### 미촬영 (사유)
+
+| 프로젝트 | 사유 |
+|---------|------|
+| 학급노트 | ⚠️ 로그인 없이 실제 학생 이름 노출 — 앱에 로그인 보호 추가 후 재촬영 |
+| 자산관리 포트폴리오 | ⚠️ 로그인 없이 실제 자산 노출 — 앱에 로그인 보호 추가 후 재촬영 |
+| 학교 전달사항 | 학교 네트워크 전용 — 학교에서 찍은 스크린샷 파일로 대체 예정 |
+| 은퇴 후 현금흐름 설계 | 이메일/비밀번호 로그인 필요 (https://retirement-cashflow-planner.vercel.app) |
+| 전자칠판 관리자 | 구글 로그인 — 사용자 Chrome에서 화면 캡처 방식 필요 |
+| 시험지 열람 신청 | 구글 로그인 — 로그인 화면만 확보됨 |
+
+### 교사 이름 마스킹 방법
+
+- DID 계열: `page.addStyleTag({content:'.subject-teacher{filter:blur(8px)}'})` 적용 후 촬영
+- 자유학기제: React 재렌더링 때문에 `setInterval`로 `(이름)` 패턴 텍스트를 반복 제거 후 촬영
+- 구글 로그인 앱: 자동화 브라우저는 구글이 차단 → 사용자 Chrome 창을 AppleScript로 {0,0,1920,1250} 배치 후
+  `screencapture -x` 전체 캡처 → sharp로 (0,300)부터 3840×2160 크롭(물리 2x) → 1920×1080 리사이즈
 
 ## 절대 규칙
 
