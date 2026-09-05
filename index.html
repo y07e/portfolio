@@ -296,6 +296,7 @@
     <a href="#life">05 개인·생활</a>
     <a href="#journey">06 여정</a>
     <a href="#tools">07 도구</a>
+<a href="infra.html">09 인프라 지도</a>
   </div>
 </nav>
 
@@ -489,6 +490,13 @@
         <div class="stack"><span>일정 관리</span><span>동선 계획</span></div>
         <button class="preview-btn" data-gallery="travel-app">미리보기 →</button>
       </div>
+      <div class="card">
+        <div class="stamp green">매일<br>사용</div>
+        <h3>재활 운동 기록</h3>
+        <p>척추 수술 후 재활 운동을 매일 체크하는 개인용 웹앱. 요일별 루틴, 걷기 시간, 주간 달성률과 월간 히트맵을 한 화면에 담았고, 서버 없이 브라우저에만 기록해 회원가입도 비용도 없습니다.</p>
+        <div class="stack"><span>Next.js</span><span>PWA</span><span>브라우저 저장</span></div>
+        <button class="preview-btn" data-gallery="rehab-tracker">미리보기 →</button>
+      </div>
     </div>
   </div>
 </section>
@@ -542,6 +550,7 @@
       <span>GitHub</span>
       <span>Mac mini M2</span>
     </div>
+    <p style="margin-top:28px;color:var(--ink-soft);font-size:.92rem">이 도구들이 실제로 어떻게 이어져 있는지는 <a href="infra.html" style="color:var(--seal);border-bottom:1px solid rgba(184,64,46,.35);text-decoration:none">앱과 서버 연결 지도 →</a>에 그려 두었습니다. 앱 15개, 배포 위치 5곳, 데이터 저장소 6개.</p>
   </div>
 </section>
 
@@ -595,6 +604,7 @@ const GALLERY = {
   'travel-app':       { title: '여행 일정 관리 앱', count: 1 },
   'moral-progress':   { title: '도덕 진도 관리', count: 1 },
   'stock-signal':     { title: '주식 신호 대시보드', count: 1 },
+  'rehab-tracker':    { title: '재활 운동 기록', count: 1 },
 };
 
 (function () {
