@@ -111,6 +111,9 @@
     transition:transform .18s ease, box-shadow .18s ease;
   }
   .card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(37,50,45,.09)}
+  .card{display:flex;flex-direction:column;align-items:flex-start}
+  .card h3,.card p,.card .stack{align-self:stretch}
+  .card .card-link{margin-top:auto;padding-top:10px;margin-bottom:0}
   .card h3{
     font-family:'Gowun Batang',serif;
     font-size:1.12rem;font-weight:700;margin-bottom:8px;padding-right:64px;
@@ -379,7 +382,7 @@
         <p>29대 전자칠판의 표시 내용을 한곳에서 제어하는 관리자 콘솔. 교실마다 돌아다니지 않고 원격으로 화면을 운영합니다.</p>
         <div class="stack"><span>관리자 콘솔</span><span>원격 제어</span></div>
         <button class="preview-btn" data-gallery="did-admin">미리보기 →</button>
-        <p style="margin-top:10px"><a href="https://github.com/y07e/ysgm-did" target="_blank" rel="noopener">github.com/y07e/ysgm-did →</a></p>
+        <p class="card-link"><a href="https://github.com/y07e/ysgm-did" target="_blank" rel="noopener">github.com/y07e/ysgm-did →</a></p>
       </div>
       <div class="card">
         <div class="stamp green">운영<br>중</div>
@@ -394,7 +397,7 @@
         <p>DID 시스템의 취지와 사용법을 교직원에게 안내하는 페이지. 시스템은 함께 쓸 때 완성된다는 원칙의 실천입니다.</p>
         <div class="stack"><span>사용 안내</span><span>교직원 공유</span></div>
         <button class="preview-btn" data-gallery="did-guide">미리보기 →</button>
-        <p style="margin-top:10px"><a href="https://ysgm-did.web.app/teachers/" target="_blank" rel="noopener">ysgm-did.web.app/teachers →</a></p>
+        <p class="card-link"><a href="https://ysgm-did.web.app/teachers/" target="_blank" rel="noopener">ysgm-did.web.app/teachers →</a></p>
       </div>
     </div>
   </div>
