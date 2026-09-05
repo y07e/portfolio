@@ -45,6 +45,8 @@ Claude Code에게 "capture.md 읽고 ○○ 프로젝트 스크린샷 다시 찍
 | travel-app | 여행 일정 관리 앱 | https://travel-route-tracker.vercel.app | 불필요(보기 모드) |
 | moral-progress | 도덕 진도 관리 | https://y07e.github.io/moral-progress-tracker/ | 불필요 |
 | stock-signal | 주식 신호 대시보드 | https://stock-signal-dashboard.onrender.com | 불필요 · 슬립 해제에 1~2분 |
+| school-briefings | 학교 전달사항 안내 | https://school-briefings.vercel.app | 학교 네트워크 전용 · 학교에서 찍은 캡처를 clipboard로 전달받아 저장 |
+| rehab-tracker | 재활 운동 기록 | https://rehab-tracker-ebon.vercel.app | 불필요 |
 
 ### 미촬영 (사유)
 
@@ -52,7 +54,6 @@ Claude Code에게 "capture.md 읽고 ○○ 프로젝트 스크린샷 다시 찍
 |---------|------|
 | 학급노트 | ⚠️ 로그인 없이 실제 학생 이름 노출 — 앱에 로그인 보호 추가 후 재촬영 |
 | 자산관리 포트폴리오 | ⚠️ 로그인 없이 실제 자산 노출 — 앱에 로그인 보호 추가 후 재촬영 |
-| 학교 전달사항 | 학교 네트워크 전용 — 학교에서 찍은 스크린샷 파일로 대체 예정 |
 | 은퇴 후 현금흐름 설계 | 이메일/비밀번호 로그인 필요 (https://retirement-cashflow-planner.vercel.app) |
 | 전자칠판 관리자 | 구글 로그인 — 사용자 Chrome에서 화면 캡처 방식 필요 |
 | 시험지 열람 신청 | 구글 로그인 — 로그인 화면만 확보됨 |
