@@ -114,7 +114,7 @@
 <nav class="toc">
   <div class="wrap">
     <a href="index.html">← 포트폴리오</a>
-    <a href="#map" class="here">지도</a>
+    <a href="#map">지도</a>
     <a href="#list">앱별 연결</a>
     <a href="#rules">운영 원칙</a>
   </div>
@@ -312,6 +312,33 @@
   var rows = tbl.querySelectorAll('tr[data-app]');
   for (var r = 0; r < rows.length; r++) bind(rows[r]);
   svg.addEventListener('click', function (ev) { if (ev.target === svg) { pinned = null; apply(null); } });
+
+  // 목차 밑줄: 지금 보고 있는 섹션의 메뉴로 옮긴다
+  var links = document.querySelectorAll('nav.toc a[href^="#"]');
+  var sections = [];
+  for (var l = 0; l < links.length; l++) {
+    var sec = document.querySelector(links[l].getAttribute('href'));
+    if (sec) sections.push({ link: links[l], sec: sec });
+  }
+  var navH = document.querySelector('nav.toc').offsetHeight;
+  function spy() {
+    var current = sections[0];
+    for (var n = 0; n < sections.length; n++) {
+      if (sections[n].sec.getBoundingClientRect().top - navH <= 8) current = sections[n];
+    }
+    // 페이지 맨 아래에 닿으면 마지막 섹션
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2) current = sections[sections.length - 1];
+    for (var m = 0; m < sections.length; m++) sections[m].link.classList.toggle('here', sections[m] === current);
+  }
+  window.addEventListener('scroll', spy, { passive: true });
+  window.addEventListener('resize', spy);
+  for (var c = 0; c < sections.length; c++) {
+    sections[c].link.addEventListener('click', function () {
+      var self = this;
+      for (var m = 0; m < sections.length; m++) sections[m].link.classList.toggle('here', sections[m].link === self);
+    });
+  }
+  spy();
 })();
 </script>
 </body>
