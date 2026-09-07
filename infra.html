@@ -182,7 +182,7 @@
     <g class="node app" data-app="moral"><rect x="30" y="350" width="270" height="44" rx="4"/><text x="42" y="368">도덕 진도 관리</text><text class="id" x="42" y="384">moral-progress-tracker · 브라우저 저장</text></g>
 
     <g class="node app" data-app="port"><rect x="30" y="436" width="270" height="44" rx="4"/><text x="42" y="454">자산관리 포트폴리오</text><text class="id" x="42" y="470">portfolio-manager · 텔레그램 · Gmail</text></g>
-    <g class="node app" data-app="jjong"><rect x="30" y="492" width="270" height="44" rx="4"/><text x="42" y="510">쫑아빠 비서</text><text class="id" x="42" y="526">jjongappa-secretary · 카카오 로그인</text></g>
+    <g class="node app" data-app="jjong"><rect x="30" y="492" width="270" height="44" rx="4"/><text x="42" y="510">쫑아빠 비서</text><text class="id" x="42" y="526">jjongappa-secretary · 구글 로그인 · 카카오 지도</text></g>
     <g class="node app" data-app="retire"><rect x="30" y="548" width="270" height="44" rx="4"/><text x="42" y="566">은퇴 후 현금흐름 설계</text><text class="id" x="42" y="582">retirement-cashflow-planner</text></g>
     <g class="node app" data-app="retsim"><rect x="30" y="604" width="270" height="44" rx="4"/><text x="42" y="622">나의 은퇴 시뮬레이터</text><text class="id" x="42" y="638">retire-sim · 계산만, 저장 없음</text></g>
     <g class="node app" data-app="stock"><rect x="30" y="660" width="270" height="44" rx="4"/><text x="42" y="678">주식 신호 대시보드</text><text class="id" x="42" y="694">stock-signal-dashboard · Python 백엔드</text></g>
@@ -200,12 +200,12 @@
 
     <g class="node db supabase"><rect x="870" y="120" width="300" height="70" rx="4"/><text x="882" y="139">Supabase · 평가 관리 <tspan class="badge">공유</tspan></text><text class="sub" x="882" y="156">고사 관리 테이블 11개 + 자산관리 테이블 14개</text><text class="sub" x="882" y="171">서울 리전 · 무료 플랜</text><text class="id" x="882" y="184">고사 데이터는 매일 새벽 자동 백업</text></g>
     <g class="node db supabase"><rect x="870" y="228" width="300" height="44" rx="4"/><text x="882" y="246">Supabase · 학교 전달사항</text><text class="id" x="882" y="262">시드니 리전 · 테이블 6개</text></g>
-    <g class="node db firebase"><rect x="870" y="478" width="300" height="44" rx="4"/><text x="882" y="496">Firebase · 쫑아빠 비서</text><text class="id" x="882" y="512">Firestore + Storage · 본인 계정만</text></g>
+    <g class="node db firebase"><rect x="870" y="478" width="300" height="44" rx="4"/><text x="882" y="496">Firebase · 쫑아빠 비서</text><text class="id" x="882" y="512">Firestore + Storage · 허용 계정만 · Blaze</text></g>
     <g class="node db firebase"><rect x="870" y="568" width="300" height="44" rx="4"/><text x="882" y="586">Firebase · 전자칠판 DID</text><text class="id" x="882" y="602">Firestore · 학급별 화면 설정</text></g>
     <g class="node db firebase"><rect x="870" y="694" width="300" height="44" rx="4"/><text x="882" y="712">Firestore · 트레이딩 데스크</text><text class="id" x="882" y="728">매매 기록 · 신호 로그</text></g>
     <g class="node db firebase"><rect x="870" y="826" width="300" height="44" rx="4"/><text x="882" y="844">Firebase · 여행 일정</text><text class="id" x="882" y="860">Firestore · 일정과 동선</text></g>
     </svg>
-    <figcaption>앱 15개 가운데 6개는 저장소가 없이 브라우저에만 기록을 남깁니다. 서버 비용이 드는 곳은 Vercel 하나뿐입니다.</figcaption>
+    <figcaption>앱 15개 가운데 6개는 저장소가 없이 브라우저에만 기록을 남깁니다. 서버 비용이 드는 곳은 Vercel과 Firebase(쫑아빠 비서 · Google Cloud 종량제, 현재 무료 한도 내) 둘입니다.</figcaption>
     </figure>
     <div class="legend">
       <span><i></i>실제로 쓰는 연결</span>
@@ -231,7 +231,7 @@
         <tr data-app="note"><td class="name">학급노트</td><td><span class="pill github">GitHub Pages</span></td><td><span class="pill none">브라우저 저장</span></td><td>—</td><td>JSON 내보내기로 백업</td></tr>
         <tr data-app="moral"><td class="name">도덕 진도 관리</td><td><span class="pill github">GitHub Pages</span></td><td><span class="pill none">브라우저 저장</span></td><td>—</td><td>학급별 진도 추적</td></tr>
         <tr data-app="port"><td class="name">자산관리 포트폴리오</td><td><span class="pill vercel">Vercel</span></td><td><span class="pill supabase">Supabase · 평가 관리 (공유)</span></td><td>텔레그램, Gmail</td><td>매일 체크리스트 발송</td></tr>
-        <tr data-app="jjong"><td class="name">쫑아빠 비서</td><td><span class="pill firebase">Firebase Hosting</span></td><td><span class="pill firebase">Firestore + Storage</span></td><td>카카오</td><td>본인 계정만 접근</td></tr>
+        <tr data-app="jjong"><td class="name">쫑아빠 비서</td><td><span class="pill firebase">Firebase Hosting</span></td><td><span class="pill firebase">Firestore + Storage</span></td><td>Google Cloud(OAuth·결제), 구글 캘린더, 카카오 지도</td><td>허용 계정만 접근(본인+지인) · Blaze 종량제, 무료 한도 내</td></tr>
         <tr data-app="retire"><td class="name">은퇴 후 현금흐름 설계</td><td><span class="pill firebase">Firebase Hosting</span></td><td><span class="pill firebase">Firestore</span></td><td>—</td><td>Vercel에 옛 배포가 남아 있음</td></tr>
         <tr data-app="retsim"><td class="name">나의 은퇴 시뮬레이터</td><td><span class="pill github">GitHub Pages</span></td><td><span class="pill none">없음</span></td><td>—</td><td>입력값으로 계산만</td></tr>
         <tr data-app="stock"><td class="name">주식 신호 대시보드</td><td><span class="pill render">Render</span></td><td><span class="pill none">없음</span></td><td>—</td><td>미사용 시 잠들었다 깨는 데 1~2분</td></tr>
