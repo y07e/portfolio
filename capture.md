@@ -50,6 +50,10 @@ Claude Code에게 "capture.md 읽고 ○○ 프로젝트 스크린샷 다시 찍
 | travel-english | 우리 부부 세계여행 영어 | https://travel-english-blond.vercel.app (로컬 http://localhost:3021) | 구글 로그인 · Claude 브라우저 패널에서 로그인 후 html2canvas로 캡처 |
 | did-admin | 전자칠판 관리자 | 의뢰인이 캡처한 화면을 clipboard로 전달 | 구글 로그인 |
 | hakgeup-note | 학급노트 | 의뢰인이 캡처한 화면을 clipboard로 전달 | ⚠️ 학생 이름 27개·담임 이름을 sharp 오버레이로 가명 처리한 뒤 게시 (원본 png는 삭제) |
+| teacher-pension | 사학연금 계산기 | https://teacher-pension-calculator.vercel.app | 불필요 · 첫 화면은 가상 예시 값 · 요약/명퇴 판단/표·그래프 탭 순 |
+| seoul-home | 서울 집 구하기 | https://seoul-home-finder.vercel.app | 불필요 · 1장=내 예산, 2장=집 찾기 탭 |
+
+> playwright 내장 브라우저가 없으면 `chromium.launch({ channel: 'chrome' })`로 설치된 Chrome을 쓰면 된다.
 
 ### 미촬영 (사유)
 

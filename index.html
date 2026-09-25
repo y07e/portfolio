@@ -418,6 +418,14 @@
         <button class="preview-btn" data-gallery="retire-simulator">미리보기 →</button>
       </div>
       <div class="card">
+        <div class="stamp green">배포<br>완료</div>
+        <h3>사학연금 계산기</h3>
+        <p>사학연금·퇴직수당·명예퇴직수당을 한 번에 계산하는 교원용 계산기. 지금·명퇴·정년 세 시점의 월 연금과 일시금을 나란히 보고, 명퇴 vs 계속 근무의 월수입 차이까지 판단해 줍니다. 공단 조회 화면을 휴대폰으로 찍어 올리면 Claude가 값을 읽어 자동으로 채웁니다.</p>
+        <div class="stack"><span>React</span><span>Claude API</span><span>Vercel</span><span>홈 화면 웹앱</span></div>
+        <button class="preview-btn" data-gallery="teacher-pension">미리보기 →</button>
+        <p class="card-link"><a href="https://teacher-pension-calculator.vercel.app" target="_blank" rel="noopener">teacher-pension-calculator.vercel.app →</a></p>
+      </div>
+      <div class="card">
         <div class="stamp green">활용<br>중</div>
         <h3>은퇴 후 현금흐름 설계</h3>
         <p>은퇴 이후 수입과 지출의 흐름을 시각화하는 설계 도구. 연금·투자·부수입이 시간에 따라 어떻게 맞물리는지 확인합니다.</p>
@@ -442,6 +450,14 @@
         <p>AI 자동매매를 실험하는 개인 트레이딩 데스크. 가장 도전적인 프로젝트로, 비개발자가 AI와 함께 갈 수 있는 한계를 시험하고 있습니다.</p>
         <div class="stack"><span>AI 자동매매</span><span>실험 프로젝트</span></div>
         <button class="preview-btn" data-gallery="trading-desk">미리보기 →</button>
+      </div>
+      <div class="card">
+        <div class="stamp green">배포<br>완료</div>
+        <h3>서울 집 구하기</h3>
+        <p>같은 돈으로 '제일 좋은 집'을 찾기 위한 웹앱. 현금·소득·금리를 넣으면 DSR·LTV·취득세까지 반영한 매수 가능 예산을 계산하고, 국토교통부 실거래가로 예산에 맞는 서울 아파트를 지도에 띄웁니다. 실거래 데이터는 매주 자동으로 갱신됩니다.</p>
+        <div class="stack"><span>React</span><span>Leaflet 지도</span><span>국토부 실거래가</span><span>GitHub Actions</span></div>
+        <button class="preview-btn" data-gallery="seoul-home">미리보기 →</button>
+        <p class="card-link"><a href="https://seoul-home-finder.vercel.app" target="_blank" rel="noopener">seoul-home-finder.vercel.app →</a></p>
       </div>
     </div>
   </div>
@@ -625,6 +641,8 @@ const GALLERY = {
   'school-briefings': { title: '학교 전달사항 안내', count: 2 },
   'hakgeup-note':     { title: '학급노트 (학생 이름은 가명)', count: 1 },
   'did-admin':        { title: '전자칠판 관리자', count: 4 },
+  'teacher-pension':  { title: '사학연금 계산기 (가상의 예시 값)', count: 3 },
+  'seoul-home':       { title: '서울 집 구하기', count: 2 },
 };
 
 (function () {
